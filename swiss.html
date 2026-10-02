@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>who am i — under construction</title>
+<meta name="description" content="CV under construction · Lebenslauf im Aufbau · 简历建设中 · CV under uppbyggnad">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0e0e0e" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='7' fill='%23e2001a'/%3E%3C/svg%3E">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+/* Layout: one poster on a 12-column modular grid (4 on phones). Type hangs flush-left from column
+   lines; the only colour is Swiss red, kept for the seal, the live progress head and the active language. */
+:root {
+  --paper: #ffffff;
+  --ink: #111111;
+  --red: #e2001a;
+  --grey: #6f6a68;
+  --tint: rgb(226 0 26 / .07);
+  --tint-line: rgb(226 0 26 / .38);
+  --grotesk: "Helvetica Neue", "Swiss Grotesk", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "Noto Sans SC", "Noto Sans CJK SC", "Source Han Sans SC", "WenQuanYi Zen Hei", sans-serif;
+  --step-s: .8125rem;
+  --step-0: 1.0625rem;
+  --step-1: clamp(1.25rem, 1.9vw, 1.75rem);
+  --margin: clamp(16px, 4vw, 56px);
+  --gutter: clamp(12px, 1.6vw, 24px);
+  --cols: 12;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0e0e0e; --ink: #f1f0ee; --red: #ff2a3a; --grey: #a29d99;
+    --tint: rgb(255 42 58 / .1); --tint-line: rgb(255 42 58 / .45);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0e0e0e; --ink: #f1f0ee; --red: #ff2a3a; --grey: #a29d99;
+  --tint: rgb(255 42 58 / .1); --tint-line: rgb(255 42 58 / .45);
+  color-scheme: dark;
+}
+
+/* A Helvetica-lineage grotesk for systems without Helvetica Neue (GNU FreeSans, Latin subset) */
+@font-face {
+  font-family: "Swiss Grotesk";
+  src: url("fonts/freesans-latin-400.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+  unicode-range: U+0020-007E, U+00A0-00FF, U+0131, U+0152-0153, U+2010-2015, U+2018-201E, U+2022, U+2026, U+2039-203A, U+2190-2199, U+2212, U+20AC;
+}
+@font-face {
+  font-family: "Swiss Grotesk";
+  src: url("fonts/freesans-latin-700.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+  unicode-range: U+0020-007E, U+00A0-00FF, U+0131, U+0152-0153, U+2010-2015, U+2018-201E, U+2022, U+2026, U+2039-203A, U+2190-2199, U+2212, U+20AC;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 var(--step-0)/1.4 var(--grotesk);
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+:lang(zh) { line-break: strict; text-spacing-trim: space-first; text-autospace: normal; }
+h1, h2, p { margin: 0; }
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: .18em; }
+a:hover { color: var(--red); }
+button { padding: 0; border: 0; background: none; color: inherit; font: inherit; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+
+/* The poster and its master grid */
+.poster {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  grid-template-rows: auto 1fr auto auto auto;
+  column-gap: var(--gutter);
+  row-gap: clamp(16px, 2.4vw, 32px);
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: var(--margin);
+  overflow: hidden;
+  overflow: clip;
+}
+.meta, .hero, .rule, .langcols, .foot {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  grid-template-columns: subgrid;
+  column-gap: var(--gutter);
+}
+
+/* Meta row */
+.meta { align-items: baseline; row-gap: 6px; font-size: var(--step-s); }
+.brand { grid-column: 1 / span 3; font-weight: 700; text-decoration: none; }
+.m-cv { grid-column: 4 / span 3; }
+.m-status { grid-column: 7 / span 3; display: flex; align-items: center; gap: .5em; }
+.pulse { width: .55em; height: .55em; border-radius: 50%; background: var(--red); animation: pulse 1.6s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: .2; } }
+.langs { grid-column: 10 / span 3; justify-self: end; display: flex; gap: 1.1em; }
+.langs button { padding-bottom: 2px; border-bottom: 2px solid transparent; color: var(--grey); font-weight: 700; }
+.langs button:hover { color: var(--ink); }
+.langs button[aria-pressed="true"] { border-bottom-color: var(--red); color: var(--ink); }
+
+/* Hero: fitted headline + the construction */
+.hero { position: relative; align-items: end; row-gap: 8px; padding-top: clamp(24px, 6vh, 72px); }
+.headline {
+  position: relative;
+  z-index: 1;
+  grid-column: 1 / span 8;
+  grid-row: 1;
+  align-self: end;
+  min-width: 0;
+  padding-bottom: .16em;
+  font-size: clamp(3.5rem, 10vw, 10rem);
+  font-weight: 700;
+  line-height: .86;
+  letter-spacing: -.045em;
+}
+.headline span { display: block; width: max-content; margin-left: -.05em; white-space: nowrap; }
+.headline:lang(zh) { padding-bottom: .04em; line-height: 1.04; letter-spacing: .01em; }
+.headline:lang(zh) span { margin-left: -.02em; }
+
+.construct {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc((100% - 11 * var(--gutter)) / 12 * 8 + 8 * var(--gutter));
+  right: calc(-1 * var(--margin) - 4vw);
+  container-type: size;
+  pointer-events: none;
+}
+.construct svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.guides { fill: none; stroke: var(--grey); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.guides * { vector-effect: non-scaling-stroke; }
+.ticks { fill: none; stroke: var(--ink); stroke-width: 9; }
+.ticks.major { stroke-width: 22; }
+.ring { fill: none; stroke: var(--ink); transform-box: view-box; transform-origin: 0 0; }
+.r1 { stroke-width: 22; animation: spin 38s linear infinite; }
+.r2 { stroke-width: 6; animation: spin 26s linear infinite reverse; }
+.r3 { stroke-width: 30; animation: spin 57s linear infinite; }
+.r4 { stroke-width: 3; animation: spin 90s linear infinite reverse; }
+.disc { fill: var(--red); }
+.hand { stroke: var(--ink); stroke-width: 3; fill: var(--ink); transform-box: view-box; transform-origin: 0 0; animation: spin 60s steps(60) infinite; }
+@keyframes spin { to { transform: rotate(1turn); } }
+/* 我是谁 set top-to-bottom like a seal; one line per character so it never depends on a font's vertical metrics */
+.seal {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100cqmin;
+  height: 100cqmin;
+  color: var(--paper);
+  font-size: 8.6cqmin;
+  font-weight: 700;
+  line-height: 1.12;
+}
+.seal span { display: block; }
+
+/* The rule under the hero doubles as the build progress: twelve segments, one per column */
+.rule { height: 10px; }
+.rule i { display: block; background: var(--ink); transform-origin: 0 50%; transition: transform .45s cubic-bezier(.2, .7, .2, 1), background-color .3s; }
+.js .rule i:not(.on) { transform: scaleX(0); }
+.rule i.head { background: var(--red); }
+
+/* Four languages, numbered in the order they were learned */
+.langcols { align-items: start; row-gap: clamp(24px, 3vw, 40px); }
+.col { grid-column: span 3; display: grid; gap: 4px; min-width: 0; padding-top: 10px; border-top: 2px solid var(--ink); transition: border-color .4s; }
+.col h2 { display: flex; align-items: baseline; gap: .7em; font-size: var(--step-s); font-weight: 700; }
+.col .n { font-variant-numeric: tabular-nums; transition: color .4s; }
+.col .role { color: var(--grey); font-size: var(--step-s); }
+.col .title { margin-top: 14px; font-size: var(--step-1); font-weight: 700; line-height: 1.08; letter-spacing: -.02em; text-wrap: balance; }
+.col .body { max-width: 36ch; margin-top: 6px; hyphens: auto; hanging-punctuation: first allow-end; }
+.col:lang(zh) .title { letter-spacing: .02em; }
+.col:lang(zh) .body { line-height: 1.75; letter-spacing: .04em; text-align: justify; }
+.col.is-active { border-top-color: var(--red); }
+.col.is-active .n { color: var(--red); }
+
+/* Footer */
+.foot { align-items: baseline; row-gap: 10px; font-size: var(--step-s); }
+.grid-toggle { grid-column: 1 / span 3; justify-self: start; display: inline-flex; align-items: center; gap: .55em; font-weight: 700; }
+.grid-toggle[aria-pressed="true"] { color: var(--red); }
+.gicon { width: 1.15em; height: .8em; background: repeating-linear-gradient(90deg, currentColor 0 2px, transparent 2px 4.6px); }
+kbd { padding: 0 .35em; border: 1px solid currentColor; border-radius: 2px; font: inherit; font-size: .85em; font-weight: 400; }
+.variants { grid-column: 4 / span 5; display: flex; flex-wrap: wrap; gap: .3em 1em; }
+.variants span { color: var(--grey); }
+.colophon { grid-column: 9 / span 4; color: var(--grey); }
+
+/* Grid overlay (press G) */
+.grid-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  column-gap: var(--gutter);
+  padding: 0 var(--margin);
+  background: repeating-linear-gradient(to bottom, transparent 0 7px, var(--tint) 7px 8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s;
+}
+.grid-overlay i { background: var(--tint); box-shadow: inset 1px 0 var(--tint-line), inset -1px 0 var(--tint-line); }
+.show-grid .grid-overlay { opacity: 1; }
+.grid-spec { position: absolute; left: var(--margin); bottom: 4px; color: var(--red); font-size: 11px; font-variant-numeric: tabular-nums; }
+
+@media (max-width: 1023px) {
+  .construct {
+    position: relative;
+    inset: auto;
+    grid-column: 1 / -1;
+    grid-row: 1;
+    justify-self: end;
+    width: min(60vw, 440px);
+    aspect-ratio: 1;
+    margin-right: calc(-1 * var(--margin) - 6vw);
+  }
+  .headline { grid-column: 1 / -1; grid-row: 2; }
+  .col { grid-column: span 6; }
+  .grid-toggle { grid-column: 1 / span 4; }
+  .variants { grid-column: 5 / span 8; }
+  .colophon { grid-column: 1 / -1; }
+}
+@media (max-width: 639px) {
+  .poster { --cols: 4; }
+  .brand { grid-column: 1 / span 2; }
+  .langs { grid-column: 3 / span 2; }
+  .m-cv { grid-column: 1 / span 2; grid-row: 2; }
+  .m-status { grid-column: 3 / span 2; grid-row: 2; justify-self: end; }
+  .construct { width: min(86vw, 420px); margin-right: calc(-1 * var(--margin) - 10vw); }
+  .rule { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 4px; height: 8px; }
+  .col, .grid-toggle, .variants, .colophon { grid-column: 1 / -1; }
+  .grid-overlay i:nth-child(n + 5) { display: none; }
+}
+@media (hover: none) { kbd { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .ring, .hand, .pulse { animation: none; }
+  .rule i, .col, .col .n { transition: none; }
+}
+</style>
+</head>
+<body>
+<div class="poster" id="poster">
+
+  <header class="meta">
+    <a class="brand" href="./">who_am_i</a>
+    <p class="m-cv" data-ui="cv">curriculum vitae</p>
+    <p class="m-status"><span class="pulse" aria-hidden="true"></span><span data-ui="status">in progress</span></p>
+    <nav class="langs" id="langs" aria-label="Language">
+      <button type="button" data-lang="zh" lang="zh-CN" title="中文">中文</button>
+      <button type="button" data-lang="en" lang="en" title="English">EN</button>
+      <button type="button" data-lang="de" lang="de" title="Deutsch">DE</button>
+      <button type="button" data-lang="sv" lang="sv" title="Svenska">SV</button>
+    </nav>
+  </header>
+
+  <section class="hero" aria-labelledby="headline">
+    <h1 class="headline" id="headline" lang="en"><span>under</span><span>construction.</span></h1>
+    <div class="construct" aria-hidden="true">
+      <svg viewBox="-300 -300 600 600" preserveAspectRatio="xMaxYMin meet">
+        <g class="guides">
+          <line x1="-300" y1="0" x2="300" y2="0"/>
+          <line x1="0" y1="-300" x2="0" y2="300"/>
+          <circle r="292" stroke-dasharray="1 6"/>
+        </g>
+        <circle class="ticks" r="266" pathLength="360" stroke-dasharray=".8 5.2" stroke-dashoffset=".4"/>
+        <circle class="ticks major" r="270" pathLength="360" stroke-dasharray="1.4 28.6" stroke-dashoffset=".7"/>
+        <circle class="ring r4" r="236" pathLength="100" stroke-dasharray="78 22"/>
+        <circle class="ring r3" r="206" pathLength="100" stroke-dasharray="26 74"/>
+        <circle class="ring r2" r="176" pathLength="100" stroke-dasharray="40 60"/>
+        <circle class="ring r1" r="148" pathLength="100" stroke-dasharray="64 36"/>
+        <circle class="disc" r="118"/>
+        <g class="hand"><line x1="0" y1="-124" x2="0" y2="-292"/><circle cy="-292" r="4"/></g>
+      </svg>
+      <p class="seal" lang="zh-CN"><span>我</span><span>是</span><span>谁</span></p>
+    </div>
+  </section>
+
+  <div class="rule" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+  <div class="langcols">
+    <section class="col" lang="zh-CN" data-col="zh">
+      <h2><span class="n">01</span><span>中文</span></h2>
+      <p class="role">母语</p>
+      <p class="title">简历建设中</p>
+      <p class="body">我的简历正在从头重建，新版本即将上线。欢迎稍后再来。</p>
+    </section>
+    <section class="col" lang="en" data-col="en">
+      <h2><span class="n">02</span><span>English</span></h2>
+      <p class="role">first foreign language</p>
+      <p class="title">under construction.</p>
+      <p class="body">My CV is being rebuilt from the ground up. A new version is coming soon. Please check back shortly.</p>
+    </section>
+    <section class="col" lang="de" data-col="de">
+      <h2><span class="n">03</span><span>Deutsch</span></h2>
+      <p class="role">zweite Fremdsprache</p>
+      <p class="title">im aufbau.</p>
+      <p class="body">Mein Lebenslauf wird gerade von Grund auf neu gestaltet. Die neue Version folgt in Kürze. Schauen Sie bald wieder vorbei.</p>
+    </section>
+    <section class="col" lang="sv" data-col="sv">
+      <h2><span class="n">04</span><span>Svenska</span></h2>
+      <p class="role">hobbyspråk</p>
+      <p class="title">under uppbyggnad.</p>
+      <p class="body">Mitt CV byggs om från grunden. En ny version kommer snart. Välkommen tillbaka lite senare.</p>
+    </section>
+  </div>
+
+  <footer class="foot">
+    <button type="button" class="grid-toggle" id="grid-toggle" aria-pressed="false"><span class="gicon" aria-hidden="true"></span><span data-ui="grid">grid</span><kbd>G</kbd></button>
+    <p class="variants"><span data-ui="variants">other variants</span><a href="construction.html" data-ui="hacker">hacker</a><a href="bahn.html" data-ui="bahn">train delay</a></p>
+    <p class="colophon" data-ui="colophon">Set in grotesque type on a twelve-column grid.</p>
+  </footer>
+
+  <div class="grid-overlay" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span class="grid-spec" id="grid-spec"></span></div>
+</div>
+
+<script>
+(() => {
+  'use strict';
+  // Ordered as learned: mother tongue, first and second foreign language, hobby.
+  const LANGS = ['zh', 'en', 'de', 'sv'];
+  const TAG = { zh: 'zh-CN', en: 'en', de: 'de', sv: 'sv' };
+  const HEAD = {
+    zh: ['简历', '建设中'],
+    en: ['under', 'construction.'],
+    de: ['im', 'aufbau.'],
+    sv: ['under', 'uppbyggnad.'],
+  };
+  const UI = {
+    zh: { title: '我是谁 — 简历建设中', nav: '语言', cv: '个人简历', status: '进行中', grid: '网格', variants: '其他版本', hacker: '黑客', bahn: '火车晚点', colophon: '以无衬线字体排版，采用十二栏网格。' },
+    en: { title: 'who am i — under construction', nav: 'Language', cv: 'curriculum vitae', status: 'in progress', grid: 'grid', variants: 'other variants', hacker: 'hacker', bahn: 'train delay', colophon: 'Set in grotesque type on a twelve-column grid.' },
+    de: { title: 'who am i — im Aufbau', nav: 'Sprache', cv: 'Lebenslauf', status: 'in Arbeit', grid: 'Raster', variants: 'andere Varianten', hacker: 'Hacker', bahn: 'Bahn', colophon: 'Gesetzt aus einer Grotesk im zwölfspaltigen Raster.' },
+    sv: { title: 'who am i — under uppbyggnad', nav: 'Språk', cv: 'meritförteckning', status: 'pågår', grid: 'rutnät', variants: 'andra varianter', hacker: 'hackare', bahn: 'tågförsening', colophon: 'Satt i grotesk på ett rutnät med tolv kolumner.' },
+  };
+
+  const root = document.documentElement;
+  const poster = document.getElementById('poster');
+  const hero = document.querySelector('.hero');
+  const headline = document.getElementById('headline');
+  const nav = document.getElementById('langs');
+  const cols = [...document.querySelectorAll('.col')];
+  const buttons = [...nav.querySelectorAll('[data-lang]')];
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Size the headline so its longest line fills the measure, without outgrowing the free height.
+  const fit = () => {
+    const stacked = innerWidth < 1024;
+    let room = innerWidth * (innerWidth < 640 ? 0.75 : 0.42);
+    if (!stacked) {
+      headline.style.fontSize = '10px';
+      const hs = getComputedStyle(hero);
+      room = Math.max(140, hero.clientHeight - parseFloat(hs.paddingTop) - parseFloat(hs.paddingBottom));
+    }
+    headline.style.fontSize = '100px';
+    const lines = [...headline.children];
+    const widest = Math.max(...lines.map((line) => line.getBoundingClientRect().width));
+    const hs = getComputedStyle(headline);
+    const ems = lines.length * (parseFloat(hs.lineHeight) / 100) + parseFloat(hs.paddingBottom) / 100;
+    const byWidth = (100 * headline.clientWidth) / widest;
+    headline.style.fontSize = `${Math.floor(Math.min(byWidth, room / ems))}px`;
+  };
+
+  const renderHeadline = (code) => {
+    headline.lang = TAG[code];
+    headline.replaceChildren(...HEAD[code].map((text) => {
+      const line = document.createElement('span');
+      line.textContent = text;
+      return line;
+    }));
+    fit();
+    cols.forEach((col) => col.classList.toggle('is-active', col.dataset.col === code));
+  };
+  const revealLines = () => {
+    if (still) return;
+    [...headline.children].forEach((line, i) => line.animate(
+      [{ opacity: 0, transform: 'translateY(.14em)' }, { opacity: 1, transform: 'none' }],
+      { duration: 560, delay: i * 90, easing: 'cubic-bezier(.2, .7, .2, 1)', fill: 'backwards' },
+    ));
+  };
+
+  let shown = null;
+  let fading = null;
+  const showHeadline = (code) => {
+    if (code === shown && !fading) return;
+    shown = code;
+    if (still) return renderHeadline(code);
+    if (fading) return; // the running fade-out picks up the latest language
+    fading = headline.animate(
+      [{ opacity: 1 }, { opacity: 0, transform: 'translateY(-.06em)' }],
+      { duration: 200, easing: 'ease-in', fill: 'forwards' },
+    );
+    fading.finished.then(() => {
+      renderHeadline(shown);
+      fading.cancel();
+      fading = null;
+      revealLines();
+    });
+  };
+
+  const setUI = (code) => {
+    const t = UI[code];
+    root.lang = TAG[code];
+    document.title = t.title;
+    document.querySelectorAll('[data-ui]').forEach((el) => { el.textContent = t[el.dataset.ui]; });
+    nav.setAttribute('aria-label', t.nav);
+    buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === code)));
+  };
+
+  // Start in the visitor's language (or #zh / #en / #de / #sv), then let the headline rotate
+  // through all four until someone picks one.
+  const hashLang = location.hash.slice(1);
+  const pinned = LANGS.includes(hashLang);
+  const preferred = (navigator.languages || [navigator.language || 'en'])
+    .map((l) => String(l).toLowerCase().split('-')[0])
+    .find((l) => LANGS.includes(l)) || 'en';
+  const first = pinned ? hashLang : preferred;
+  setUI(first);
+  shown = first;
+  renderHeadline(first);
+  revealLines();
+
+  let cycle = pinned || still ? null : setInterval(() => {
+    showHeadline(LANGS[(LANGS.indexOf(shown) + 1) % LANGS.length]);
+  }, 5200);
+
+  const choose = (code) => {
+    clearInterval(cycle);
+    cycle = null;
+    setUI(code);
+    showHeadline(code);
+    history.replaceState(null, '', `#${code}`);
+  };
+  buttons.forEach((b) => b.addEventListener('click', () => choose(b.dataset.lang)));
+  addEventListener('hashchange', () => {
+    const code = location.hash.slice(1);
+    if (LANGS.includes(code)) choose(code);
+  });
+
+  // Grid overlay
+  const gridButton = document.getElementById('grid-toggle');
+  const spec = document.getElementById('grid-spec');
+  const toggleGrid = () => {
+    const on = poster.classList.toggle('show-grid');
+    gridButton.setAttribute('aria-pressed', String(on));
+    if (!on) return;
+    const ps = getComputedStyle(poster);
+    const count = ps.gridTemplateColumns.split(' ').length;
+    spec.textContent = `${count} col · ${Math.round(parseFloat(ps.columnGap))} px gutter · ${Math.round(parseFloat(ps.paddingLeft))} px margin · 8 px baseline`;
+  };
+  gridButton.addEventListener('click', toggleGrid);
+
+  addEventListener('keydown', (e) => {
+    if (e.metaKey || e.ctrlKey || e.altKey || e.isComposing) return;
+    if (e.key === 'g' || e.key === 'G') toggleGrid();
+    else if (/^[1-4]$/.test(e.key)) choose(LANGS[Number(e.key) - 1]);
+  });
+
+  // Build progress: the rule fills column by column, newest segment in red, then starts over.
+  const segments = [...document.querySelectorAll('.rule i')];
+  let step = still ? segments.length : 0;
+  const paint = () => segments.forEach((seg, i) => {
+    seg.classList.toggle('on', i < step);
+    seg.classList.toggle('head', i === step - 1 && step <= segments.length);
+  });
+  paint();
+  if (!still) setInterval(() => { step = (step + 1) % (segments.length + 4); paint(); }, 450);
+
+  // The construction's hand is a real second hand.
+  const now = new Date();
+  document.querySelector('.hand').style.animationDelay = `-${now.getSeconds() + now.getMilliseconds() / 1000}s`;
+
+  let lastWidth = innerWidth;
+  addEventListener('resize', () => {
+    if (innerWidth < 1024 && innerWidth === lastWidth) return; // stacked layouts size by width only
+    lastWidth = innerWidth;
+    requestAnimationFrame(fit);
+  });
+  if (document.fonts) document.fonts.ready.then(fit);
+})();
+</script>
+</body>
+</html>

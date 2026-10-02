@@ -4,17 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Who Am I</title>
-<meta name="description" content="Under construction · Lebenslauf verspätet">
+<meta name="description" content="Under construction · Lebenslauf verspätet · 简历建设中">
 <script>
-  // Coin flip: every visit lands on one of the two placeholder pages.
-  location.replace(Math.random() < 0.5 ? 'construction.html' : 'bahn.html');
+  // Every visit lands on one of the three placeholder pages.
+  const pages = ['construction.html', 'bahn.html', 'swiss.html'];
+  location.replace(pages[Math.floor(Math.random() * pages.length)]);
 </script>
 </head>
 <body style="margin:0;min-height:100vh;background:#040b26">
 <noscript>
   <p style="padding:16px;font:20px monospace;color:#39ff14">
     <a href="construction.html" style="color:#ffd400">Under construction</a> ·
-    <a href="bahn.html" style="color:#ffd400">Lebenslauf verspätet</a>
+    <a href="bahn.html" style="color:#ffd400">Lebenslauf verspätet</a> ·
+    <a href="swiss.html" style="color:#ffd400">简历建设中</a>
   </p>
 </noscript>
 </body>

@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Who_Am_I Hbf – Lebenslauf verspätet</title>
+<meta name="description" content="Information zu ICE 404 nach Lebenslauf: Heute ca. 25 Minuten später. Wir bitten um Entschuldigung.">
+<style>
+:root {
+  --blue: #0b2072;
+  --blue-alt: #0e2785;
+  --night: #040b26;
+  --bezel: #1d2028;
+  --ink: #fff;
+  --muted: #b8c4f5;
+  --yellow: #ffd500;
+  --red: #e0001b;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 16px;
+  background: radial-gradient(120% 70% at 50% 0%, #142a73 0%, var(--night) 65%) var(--night);
+  color: var(--ink);
+  font-family: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", sans-serif;
+  line-height: 1.35;
+}
+p { margin: 0; }
+.wrap { max-width: 1040px; margin: 0 auto; display: grid; gap: 18px; }
+
+/* Bahnhofsschild */
+.sign {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 18px;
+  padding: 14px 22px;
+  background: var(--blue);
+  border-radius: 6px;
+  box-shadow: inset 0 0 0 5px var(--blue), inset 0 0 0 8px #fff, 0 12px 30px rgba(0, 0, 0, .5);
+}
+.sign h1 { margin: 0; font-size: clamp(1.7rem, 6vw, 3rem); letter-spacing: .01em; }
+.uhrzeit { display: flex; align-items: center; gap: 12px; }
+.uhr { width: clamp(44px, 9vw, 64px); height: auto; }
+.digital { font-size: clamp(1.3rem, 4.5vw, 2rem); font-weight: 700; font-variant-numeric: tabular-nums; }
+
+/* Anzeigen: gemeinsamer Rahmen */
+.zza, .board {
+  background: var(--blue);
+  border: 10px solid var(--bezel);
+  border-radius: 10px;
+  box-shadow: 0 0 0 2px #3b404c, 0 22px 50px rgba(0, 0, 0, .55);
+  overflow: hidden;
+}
+
+/* Zugzielanzeiger */
+.zza { display: grid; grid-template-columns: auto minmax(0, 1fr); }
+.gleis {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 10px clamp(10px, 2.5vw, 24px);
+  background: #fff; color: var(--blue);
+}
+.gleis small { font-size: clamp(.75rem, 2vw, 1rem); font-weight: 700; }
+.gleis strong { font-size: clamp(3rem, 11vw, 6.5rem); line-height: .95; }
+.zza-main { display: grid; gap: 4px; padding: clamp(10px, 2.5vw, 22px); }
+.zza-top { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; font-size: clamp(1.1rem, 3.4vw, 1.7rem); font-weight: 700; }
+.chip { margin-left: auto; padding: 1px 10px; border-radius: 3px; background: var(--yellow); color: #111; font-size: .9em; white-space: nowrap; }
+.chip.cancelled { background: var(--red); color: #fff; }
+.gone, .cancelled .late { display: none; }
+.cancelled .gone { display: inline; }
+.via { margin-top: 6px; color: var(--muted); font-size: clamp(.95rem, 2.6vw, 1.25rem); }
+.dest { font-size: clamp(1.8rem, 8vw, 4.6rem); font-weight: 800; line-height: 1.05; white-space: nowrap; overflow: hidden; }
+.reason { color: var(--yellow); font-size: clamp(1rem, 2.8vw, 1.35rem); font-weight: 700; }
+
+/* Laufschrift */
+.ticker { grid-column: 1 / -1; overflow: hidden; white-space: nowrap; padding: 7px 0; background: #fff; color: var(--blue); font-weight: 700; font-size: clamp(1rem, 2.8vw, 1.35rem); }
+.track { display: inline-flex; animation: laufschrift 70s linear infinite; }
+.track span { padding-right: 3em; }
+@keyframes laufschrift { to { transform: translateX(-50%); } }
+
+/* Wagenreihung */
+.wagen { grid-column: 1 / -1; min-width: 0; overflow-x: auto; padding: 12px clamp(10px, 2.5vw, 22px) 14px; }
+.sektoren, .zug { display: grid; grid-template-columns: repeat(7, minmax(78px, 1fr)); gap: 6px; margin: 0; padding: 0; list-style: none; }
+.sektoren { margin-bottom: 6px; color: var(--muted); font-weight: 700; text-align: center; }
+.zug li { display: grid; place-items: center; align-content: center; min-height: 54px; padding: 6px 4px; border: 2px solid #fff; border-radius: 6px; font-size: .78rem; text-align: center; }
+.zug b { font-size: 1.15rem; }
+.zug small { color: var(--yellow); }
+.zug .lok { background: #fff; color: var(--blue); font-weight: 800; border-radius: 6px 26px 26px 6px; }
+.note { margin-top: 8px; color: var(--yellow); font-weight: 700; }
+
+/* Abfahrtstafel */
+.board h2 { display: flex; align-items: center; gap: 12px; margin: 0; padding: 12px 16px; border-bottom: 3px solid #fff; font-size: clamp(1.4rem, 4.5vw, 2.1rem); }
+.board h2 span { color: var(--muted); font-size: .55em; font-weight: 400; }
+.board h2 svg { width: 1.1em; height: 1.1em; }
+table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: clamp(.95rem, 2.4vw, 1.2rem); }
+.c-time { width: 5.8em; }
+.c-gleis { width: 3.8em; }
+th { padding: 8px 12px; border-bottom: 1px solid rgba(255, 255, 255, .3); color: var(--muted); font-size: .8em; font-weight: 400; text-align: left; }
+td { padding: 10px 12px; border-bottom: 1px solid rgba(255, 255, 255, .12); vertical-align: top; }
+tbody tr:nth-child(even) { background: var(--blue-alt); }
+td:first-child time { display: block; font-size: 1.15em; font-weight: 700; font-variant-numeric: tabular-nums; }
+td:first-child small { color: var(--muted); }
+th:last-child, td:last-child { text-align: center; }
+td:last-child { font-size: 1.25em; font-weight: 700; }
+.name { display: block; font-size: 1.15em; font-weight: 700; hyphens: auto; overflow-wrap: anywhere; }
+.hint { display: block; margin-top: 2px; color: var(--muted); font-size: .88em; }
+.hint.warn { color: var(--yellow); }
+.tag { padding: 1px 8px; border-radius: 2px; background: var(--red); color: #fff; font-style: normal; font-weight: 700; }
+.cancel time { text-decoration: line-through 2px; }
+mark { padding: 0 .3em; border-radius: 2px; background: #fff; color: var(--blue); }
+
+/* Durchsage & Co. */
+.actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn { padding: 10px 18px; border: 2px solid #fff; border-radius: 4px; background: #fff; color: var(--blue); font: inherit; font-weight: 700; text-decoration: none; cursor: pointer; }
+.btn.ghost { background: transparent; color: #fff; }
+.btn:hover { background: #dfe5ff; }
+.btn.ghost:hover { background: rgba(255, 255, 255, .12); }
+.btn:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
+.subtitle { padding: 12px 16px; border-left: 4px solid var(--yellow); background: rgba(255, 255, 255, .07); }
+.rights { color: var(--yellow); font-weight: 700; }
+footer { padding: 4px 0 12px; color: var(--muted); font-size: .85rem; text-align: center; }
+
+@media (max-width: 600px) {
+  th, td { padding: 8px; }
+  .c-time { width: 5em; }
+  .c-gleis { width: 3.2em; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticker { white-space: normal; padding: 7px 14px; }
+  .track { display: block; animation: none; }
+  .track [aria-hidden] { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="sign">
+    <h1>Who_Am_I Hbf</h1>
+    <div class="uhrzeit">
+      <svg class="uhr" viewBox="-50 -50 100 100" aria-hidden="true">
+        <circle r="47" fill="#fff" stroke="#c9ced8" stroke-width="4"/>
+        <g id="ticks" stroke="#111"></g>
+        <line id="zeiger-h" y1="8" y2="-25" stroke="#111" stroke-width="6.5"/>
+        <line id="zeiger-m" y1="10" y2="-39" stroke="#111" stroke-width="4.5"/>
+        <line id="zeiger-s" y1="13" y2="-36" stroke="#e0001b" stroke-width="1.6"/>
+        <circle r="2.6" fill="#e0001b"/>
+      </svg>
+      <span class="digital" id="clock">--:--:--</span>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="zza" aria-label="Zuganzeige Gleis 7">
+      <div class="gleis"><small>Gleis</small><strong>7</strong></div>
+      <div class="zza-main">
+        <div class="zza-top">
+          <span data-plan="-3">09:57</span>
+          <span>ICE 404</span>
+          <span class="chip" data-status><span class="late">ca. +<b data-delay>25</b></span><span class="gone">Fällt heute aus</span></span>
+        </div>
+        <p class="via">über Ausbildung – Berufserfahrung – Skills</p>
+        <p class="dest" data-flap>Lebenslauf</p>
+        <p class="reason" id="reason">Grund: Verzögerungen im Betriebsablauf</p>
+      </div>
+      <div class="ticker">
+        <div class="track">
+          <span>+++ Information zu ICE 404 nach Lebenslauf: Heute ca. <b data-delay>25</b> Minuten später +++ Grund: Verzögerungen im Betriebsablauf +++ Der Lebenslauf wird gerade überarbeitet und ist vorübergehend nicht verfügbar +++ Ein Ersatz-Lebenslauf ist bereits bestellt +++ Die Wagen der 1. Klasse halten heute in Abschnitt Z +++ Wir bitten um Ihr Verständnis +++</span>
+          <span aria-hidden="true">+++ Information zu ICE 404 nach Lebenslauf: Heute ca. <b data-delay>25</b> Minuten später +++ Grund: Verzögerungen im Betriebsablauf +++ Der Lebenslauf wird gerade überarbeitet und ist vorübergehend nicht verfügbar +++ Ein Ersatz-Lebenslauf ist bereits bestellt +++ Die Wagen der 1. Klasse halten heute in Abschnitt Z +++ Wir bitten um Ihr Verständnis +++</span>
+        </div>
+      </div>
+      <div class="wagen">
+        <ol class="sektoren" aria-hidden="true"><li>A</li><li>B</li><li>C</li><li>D</li><li>E</li><li>F</li><li>G</li></ol>
+        <ol class="zug" aria-label="Wagenreihung">
+          <li><b>6</b>Hobbys</li>
+          <li><b>5</b>Projekte</li>
+          <li><b>4</b>Bordbistro<small>geschlossen</small></li>
+          <li><b>3</b>Skills</li>
+          <li><b>2</b>Erfahrung</li>
+          <li><b>1</b>Ausbildung</li>
+          <li class="lok">Lok</li>
+        </ol>
+        <p class="note">Heute in umgekehrter Wagenreihung</p>
+      </div>
+    </section>
+
+    <section class="board" aria-labelledby="abfahrt">
+      <h2 id="abfahrt">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="2" width="14" height="16" rx="3" fill="#fff"/><rect x="7" y="5" width="10" height="5" rx="1" fill="#0b2072"/><circle cx="9" cy="14" r="1.4" fill="#0b2072"/><circle cx="15" cy="14" r="1.4" fill="#0b2072"/><path d="M8.5 18 6 22M15.5 18 18 22" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+        Abfahrt <span>Departure</span>
+      </h2>
+      <table>
+        <colgroup><col class="c-time"><col><col class="c-gleis"></colgroup>
+        <thead>
+          <tr><th scope="col">Zeit</th><th scope="col">Nach</th><th scope="col">Gleis</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><time data-plan="-3">09:57</time><small>ICE 404</small></td>
+            <td><span class="name" data-flap>Lebenslauf</span><span class="hint warn" data-status><span class="late">ca. +<b data-delay>25</b> · Reparatur am Lebenslauf</span><span class="gone"><em class="tag">Fällt heute aus</em></span></span></td>
+            <td>7</td>
+          </tr>
+          <tr class="cancel">
+            <td><time data-plan="2">10:02</time><small>RE 7</small></td>
+            <td><span class="name" data-flap>Anschreiben</span><span class="hint"><em class="tag">Fällt heute aus</em></span></td>
+            <td>3</td>
+          </tr>
+          <tr>
+            <td><time data-plan="6">10:06</time><small>IC 2026</small></td>
+            <td><span class="name" data-flap>Portfolio</span><span class="hint">Heute von Gleis 12 statt 9¾</span></td>
+            <td><mark>12</mark></td>
+          </tr>
+          <tr>
+            <td><time data-plan="9">10:09</time><small>S 1</small></td>
+            <td><span class="name" data-flap>Zeugnisse &amp; Zertifikate</span><span class="hint warn">ca. +15 · Warten auf Anschlussreisende</span></td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td><time data-plan="14">10:14</time><small>Bus SEV</small></td>
+            <td><span class="name" data-flap>Vorstellungsgespräch</span><span class="hint">Ersatzverkehr mit Bussen ab Bahnhofsvorplatz</span></td>
+            <td>Bus</td>
+          </tr>
+          <tr>
+            <td><time data-plan="21">10:21</time><small>ICE 1337</small></td>
+            <td><span class="name" data-flap>Traumjob Hbf</span><span class="hint">Wartet auf Anschluss aus ICE 404</span></td>
+            <td>5</td>
+          </tr>
+          <tr>
+            <td><time data-plan="59">10:59</time><small>RB 0</small></td>
+            <td><span class="name" data-flap>Pünktlichkeit</span><span class="hint">Existiert nur im Fahrplan</span></td>
+            <td>–</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <div class="actions">
+      <button type="button" class="btn" id="ansage">🔊 Durchsage abspielen</button>
+      <a class="btn ghost" href="construction.html">Umsteigen: zur Baustelle →</a>
+    </div>
+    <p class="subtitle" id="subtitle" aria-live="polite" hidden></p>
+    <p class="rights" id="rights" hidden></p>
+  </main>
+
+  <footer>
+    Der Lebenslauf wird gerade überarbeitet und ist bald wieder verfügbar. Wir bitten um Ihr Verständnis.<br>
+    Parodie – keine Verbindung zur Deutschen Bahn AG.
+  </footer>
+</div>
+
+<script>
+(() => {
+  'use strict';
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const berlin = { timeZone: 'Europe/Berlin', hourCycle: 'h23', hour: '2-digit', minute: '2-digit' };
+  const fmtHM = new Intl.DateTimeFormat('de-DE', berlin);
+  const fmtHMS = new Intl.DateTimeFormat('de-DE', { ...berlin, second: '2-digit' });
+
+  // Bahnhofsuhr: digital + analog, minute hand jumps like the real thing
+  const digital = document.getElementById('clock');
+  const ticks = document.getElementById('ticks');
+  for (let i = 0; i < 60; i++) {
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('y1', '-43');
+    line.setAttribute('y2', i % 5 ? '-39' : '-32');
+    line.setAttribute('stroke-width', i % 5 ? '1.5' : '4');
+    line.setAttribute('transform', `rotate(${i * 6})`);
+    ticks.append(line);
+  }
+  const [handH, handM, handS] = ['h', 'm', 's'].map((k) => document.getElementById(`zeiger-${k}`));
+  const tick = () => {
+    const now = new Date();
+    digital.textContent = fmtHMS.format(now);
+    const t = Object.fromEntries(fmtHMS.formatToParts(now).map((p) => [p.type, Number(p.value)]));
+    handH.setAttribute('transform', `rotate(${(t.hour % 12) * 30 + t.minute * 0.5})`);
+    handM.setAttribute('transform', `rotate(${t.minute * 6})`);
+    handS.setAttribute('transform', `rotate(${t.second * 6})`);
+  };
+  tick();
+  setInterval(tick, 500);
+
+  // Timetable is relative to "now" (data-plan = minutes from now)
+  const base = new Date();
+  base.setSeconds(0, 0);
+  document.querySelectorAll('[data-plan]').forEach((el) => {
+    el.textContent = fmtHM.format(new Date(base.getTime() + Number(el.dataset.plan) * 60000));
+  });
+  const planned = document.querySelector('.zza-top [data-plan]').textContent;
+
+  // Fallblatt: scramble, then settle left to right
+  const GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜ0123456789';
+  const scramble = (text, keep) => text.slice(0, keep) + [...text.slice(keep)]
+    .map((ch) => (ch === ' ' ? ' ' : GLYPHS[(Math.random() * GLYPHS.length) | 0])).join('');
+  const flap = (el, wait = 0) => {
+    if (reduceMotion) return;
+    const text = el.textContent;
+    const start = performance.now() + wait;
+    clearInterval(el.flapTimer);
+    el.textContent = scramble(text, 0);
+    el.flapTimer = setInterval(() => {
+      const shown = Math.max(0, Math.floor((performance.now() - start) / 45));
+      el.textContent = shown >= text.length ? text : scramble(text, shown);
+      if (shown >= text.length) clearInterval(el.flapTimer);
+    }, 45);
+  };
+  document.querySelectorAll('[data-flap]').forEach((el, i) => flap(el, i * 140));
+
+  // Gründe – the classics, plus a few local specialities
+  const REASONS = [
+    'Verzögerungen im Betriebsablauf',
+    'Reparatur am Lebenslauf',
+    'Personalverantwortliche im Gleis',
+    'Verspätung eines vorausfahrenden Lebenslaufs',
+    'Laub auf der Strecke',
+    'Merge-Konflikt im Stellwerk',
+    'Weichenstörung zwischen Ausbildung und Beruf',
+    'Signalstörung im WLAN',
+    'Kurzfristiger Personalausfall',
+    'Der Lokführer sucht noch die passende Schriftart',
+    'Die Git-History wird neu geschrieben',
+    'Kühe auf der Strecke',
+    'Bauarbeiten am Lebenslauf',
+    'Warten auf Anschlussreisende',
+    'Kaffeemaschine im Bordbistro defekt',
+    'PDF-Export steckt im Tunnel fest',
+    'Stau auf dem Weg zur Selbstfindung',
+  ];
+  const reasonEl = document.getElementById('reason');
+  let reasonIdx = (Math.random() * REASONS.length) | 0;
+  let currentReason = '';
+  const showLine = (text) => {
+    reasonEl.textContent = text;
+    flap(reasonEl);
+  };
+  const showReason = (text) => {
+    currentReason = text;
+    showLine(`Grund: ${text}`);
+  };
+  showReason(REASONS[reasonIdx]);
+
+  // The delay only ever grows, five minutes at a time – until the train is cancelled
+  const delayEls = document.querySelectorAll('[data-delay]');
+  const statusEls = document.querySelectorAll('[data-status]');
+  const rights = document.getElementById('rights');
+  let delay = 15 + 5 * ((Math.random() * 4) | 0);
+  let cancelled = false;
+  const render = () => {
+    delayEls.forEach((el) => { el.textContent = delay; });
+    statusEls.forEach((el) => el.classList.toggle('cancelled', cancelled));
+    const share = delay >= 120 ? 50 : delay >= 60 ? 25 : 0;
+    rights.hidden = !share || cancelled;
+    rights.textContent = `Fahrgastrechte: Ab ${share === 50 ? 120 : 60} Minuten Verspätung erhalten Sie ${share} % Entschädigung – auszahlbar in Geduld.`;
+  };
+  render();
+
+  setInterval(() => {
+    if (cancelled) return;
+    reasonIdx = (reasonIdx + 1 + ((Math.random() * (REASONS.length - 1)) | 0)) % REASONS.length;
+    showReason(REASONS[reasonIdx]);
+  }, 7000);
+
+  setInterval(() => {
+    if (cancelled) return;
+    delay += 5;
+    if (delay >= 180) {
+      cancelled = true;
+      showLine('Ein Ersatz-Lebenslauf ist bestellt.');
+      setTimeout(() => {
+        cancelled = false;
+        delay = 10;
+        render();
+        showReason(REASONS[reasonIdx]);
+      }, 12000);
+    }
+    render();
+  }, 6000);
+
+  // Durchsage: gong, then the announcement (speech where the browser supports it)
+  const chime = () => new Promise((resolve) => {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return resolve();
+    const ctx = new AudioCtx();
+    [659.25, 523.25, 392].forEach((freq, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      const t = ctx.currentTime + i * 0.5;
+      osc.type = 'sine';
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0.0001, t);
+      gain.gain.exponentialRampToValueAtTime(0.25, t + 0.03);
+      gain.gain.exponentialRampToValueAtTime(0.0001, t + 1.4);
+      osc.connect(gain).connect(ctx.destination);
+      osc.start(t);
+      osc.stop(t + 1.5);
+    });
+    setTimeout(() => { ctx.close(); resolve(); }, 2100);
+  });
+
+  const subtitle = document.getElementById('subtitle');
+  document.getElementById('ansage').addEventListener('click', async () => {
+    const status = cancelled
+      ? `Dieser Zug fällt heute leider aus. Grund dafür: ${currentReason}. Ein Ersatz-Lebenslauf ist bestellt.`
+      : `Dieser Zug hat heute circa ${delay} Minuten Verspätung. Grund dafür: ${currentReason}.`;
+    const text = `Sehr geehrte Fahrgäste, eine Information zu ICE 404 nach Lebenslauf, planmäßige Abfahrt ${planned} Uhr. ${status} Wir bitten um Entschuldigung.`;
+    subtitle.hidden = false;
+    subtitle.textContent = text;
+
+    const speech = 'speechSynthesis' in window ? window.speechSynthesis : null;
+    if (speech) {
+      // Speak once inside the click so mobile Safari allows the delayed announcement
+      speech.cancel();
+      speech.speak(new SpeechSynthesisUtterance(' '));
+    }
+    await chime();
+    if (!speech) return;
+    const utterance = new SpeechSynthesisUtterance(text.replace('ICE', 'I C E'));
+    utterance.lang = 'de-DE';
+    utterance.rate = 0.95;
+    const voice = speech.getVoices().find((v) => /^de\b/i.test(v.lang));
+    if (voice) utterance.voice = voice;
+    speech.speak(utterance);
+  });
+})();
+</script>
+</body>
+</html>
